@@ -10,6 +10,7 @@
   "type": "commonjs",
   "files": [
     "dotframe.js",
+    "dotframe-export.js",
     "README.md",
     "LICENSE"
   ],

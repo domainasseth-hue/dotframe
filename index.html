@@ -120,6 +120,7 @@
   <label class="btn">open file<input type="file" id="file" accept="image/*,video/*"></label>
   <button id="webcam">webcam</button>
   <button id="demo">demo</button>
+  <button id="export">export gif</button>
   <button id="copy">copy frame</button>
   <button id="toggle">pause</button>
 </header>
@@ -146,6 +147,7 @@
 <div id="toast"></div>
 
 <script src="dotframe.js"></script>
+<script src="dotframe-export.js"></script>
 <script>
 (function () {
   var out = document.getElementById('out');
@@ -299,6 +301,32 @@
     navigator.clipboard.writeText(df.snapshot()).then(function () {
       toast('frame copied');
     }, function () { toast('copy failed'); });
+  });
+
+  var exporting = false;
+  document.getElementById('export').addEventListener('click', function () {
+    if (!df || exporting) return;
+    exporting = true;
+    var btn = this;
+    btn.textContent = 'recording…';
+    DotFrameExport.gif(df, {
+      bg: '#0b0d10',
+      fg: document.getElementById('tint').value,
+      scale: df.cols > 120 ? 1 : 2
+    }).then(function (blob) {
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'dotframe.gif';
+      a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 5000);
+      toast('gif downloaded (' + Math.round(blob.size / 1024) + ' KB)');
+    }).catch(function (e) {
+      console.error(e);
+      toast('export failed');
+    }).then(function () {
+      exporting = false;
+      btn.textContent = 'export gif';
+    });
   });
 
   document.getElementById('toggle').addEventListener('click', function () {

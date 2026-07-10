@@ -99,6 +99,39 @@ render continuously.
 `df.cols` / `df.rows` — output grid size in characters, available once
 rendering starts. Handy for fitting the font size to a container.
 
+## Exporting a looping GIF
+
+`dotframe-export.js` is an optional zero-dependency add-on that records a
+running DotFrame and encodes a looping animated GIF **entirely in the
+browser** — no canvas text rendering, no server, no libraries. The dots are
+rasterized straight into indexed pixels, so files are small, crisp, and loop
+forever anywhere a GIF plays. The demo's **export gif** button uses it.
+
+```html
+<script src="dotframe.js"></script>
+<script src="dotframe-export.js"></script>
+<script>
+  const blob = await DotFrameExport.gif(df, { scale: 2 });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'dotframe.gif';
+  a.click();
+</script>
+```
+
+### `DotFrameExport.gif(df, options?)` → `Promise<Blob>`
+
+| Option | Default | Description |
+| --- | --- | --- |
+| `duration` | one loop / `4000` | Milliseconds to record. Animated image sources default to exactly one full loop; video/canvas/webcam default to 4 s. |
+| `scale` | `1` | Pixels per dot unit. Frame size is `cols×5 × rows×10` units. |
+| `bg`, `fg` | `#000000`, `#c0c0c0` | Background and dot color (hex). In color mode, per-cell colors are used and `fg` is the fallback. |
+| `loop` | `0` | GIF repeat count; `0` = loop forever. |
+
+Still images (or a stopped DotFrame) export as a single-frame GIF. Duplicate
+frames are deduplicated into longer delays automatically. There's also
+`DotFrameExport.encode(frames, options)` if you want to build frames yourself.
+
 ## How it works
 
 1. Each frame, the source is drawn onto a small offscreen canvas at
