@@ -19,8 +19,7 @@ every frame, in real time.
 
 ## Live demo
 
-**▶ [Try it live](#)** — _link coming soon._
-
+**▶ [Try it live](#https://dotframe.netlify.app/)** 
 Or run it locally: open `index.html`, or serve the folder and drag in any
 image, GIF, or video (there's a built-in plasma demo and a webcam mode too).
 
