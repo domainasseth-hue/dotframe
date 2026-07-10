@@ -1,0 +1,42 @@
+{
+  "name": "dotframe",
+  "version": "0.1.0",
+  "description": "Zero-dependency, browser-based GIF/video/image to Braille dot art converter. Renders live animated Unicode dot art (U+2800-U+28FF) into a <pre> element.",
+  "main": "dotframe.js",
+  "module": "dotframe.js",
+  "browser": "dotframe.js",
+  "unpkg": "dotframe.js",
+  "jsdelivr": "dotframe.js",
+  "type": "commonjs",
+  "files": [
+    "dotframe.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [
+    "braille",
+    "dot-art",
+    "ascii-art",
+    "gif",
+    "video",
+    "canvas",
+    "image-to-text",
+    "unicode",
+    "visualizer",
+    "zero-dependencies"
+  ],
+  "author": "LoomingAI LLC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/domainasseth-hue/dotframe.git"
+  },
+  "homepage": "https://github.com/domainasseth-hue/dotframe#readme",
+  "bugs": {
+    "url": "https://github.com/domainasseth-hue/dotframe/issues"
+  },
+  "sideEffects": false
+}
